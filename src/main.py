@@ -30,11 +30,11 @@ def main():
     # Data preparation
     criterion = nn.CrossEntropyLoss()
     K = len(train_loader.dataset)  # Number of training examples
-    M = n_classes
+    M = n_classes # Number of classes
     
     # Training multiple experiments
     for idx, (num_heads, include_mlp, modification) in enumerate(hyperparameter_combinations):
-        # Initialize model to calculate P and Q
+        # Initialize model to calculate P (number of parameters)
         model = ReducedTransformer(
             embed_dim=embed_dim,
             num_heads=num_heads,
@@ -50,7 +50,7 @@ def main():
         P = count_parameters(model)  # Number of trainable parameters
         Q = K * M / P  # Calculate Q
     
-        # Initialize Weights & Biases for each run with Q in config
+        # Initialize Weights & Biases for each run 
         wandb.init(
             project=cfg.wandb_project_name,
             name=f"Exper-{idx + 1}",
