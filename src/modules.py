@@ -4,6 +4,7 @@ import torch.nn.functional as F
 import torch.nn.init as init
 
 class PatchEmbedding(nn.Module):
+  """Embeds input images into patch representations with positional embeddings for transformer models."""
   def __init__(self, embed_dim, patch_size, num_patches, dropout, in_channels):
       super().__init__()
       self.patcher = nn.Sequential(
@@ -35,6 +36,7 @@ class PatchEmbedding(nn.Module):
       
 
 class MultiHeadSelfAttention(nn.Module):
+    """MulitHeadSelfAttention architecture for the different modifications"""
     def __init__(self, emb_dim, num_heads, modification):
         super(MultiHeadSelfAttention, self).__init__()
         self.emb_dim = emb_dim
@@ -44,23 +46,27 @@ class MultiHeadSelfAttention(nn.Module):
         self.modification = modification
         self.attn_drop = nn.Dropout(0.1)
 
-        if self.modification == "unchanged":
+        if self.modification == "unchanged": 
+            # Traditional Attention Mechanism.
             self.query = nn.Linear(emb_dim, emb_dim)
             self.key = nn.Linear(emb_dim, emb_dim)
             self.value = nn.Linear(emb_dim, emb_dim)
             self.out = nn.Linear(emb_dim, emb_dim)
         
-        if self.modification == "Wqk":
+        if self.modification == "Wqk": 
+            # Query and key matrices are collapsed into a single matrix of the same size.
             self.qk = nn.Linear(emb_dim,emb_dim)
             self.value = nn.Linear(emb_dim, emb_dim)
             self.out = nn.Linear(emb_dim, emb_dim)
 
-        if self.modification == "Wqk+noWvWo":
+        if self.modification == "Wqk+noWvWo": 
+            # In addition to the collapsed query and key matrices, value and projection matrices, are omitted without eliminating the substance of the attention mechanism.
             self.qk = nn.Linear(emb_dim,emb_dim)
 
-        if self.modification == "symmetry" :
+        if self.modification == "symmetry" : 
+            # The symmetric definition of a similarity matrix requires only half the parameters. This can be achieved by parameterizing a lower triangular matrix and multiplying it by its transpose.
+            
             # Initialize one triangular matrix per attention head
-            # Size of triangular matrix parameters for each head
             tril_size = (self.head_dim * (self.head_dim + 1)) // 2
             # Create parameters for all heads
             self.trainable_params = nn.Parameter(
@@ -74,7 +80,6 @@ class MultiHeadSelfAttention(nn.Module):
 
 
         if self.modification == "unchanged":
-
             Q = self.query(x).view(bs, seq_len, self.num_heads, self.head_dim).transpose(1, 2) 
             K = self.key(x).view(bs, seq_len, self.num_heads, self.head_dim).transpose(1, 2)   
             V = self.value(x).view(bs, seq_len, self.num_heads, self.head_dim).transpose(1, 2) 
@@ -116,10 +121,7 @@ class MultiHeadSelfAttention(nn.Module):
     
 
         if self.modification == "symmetry":
-            # Process values first
             V = self.value(x).view(bs, seq_len, self.num_heads, self.head_dim).transpose(1, 2)
-            
-            # Initialize attention scores tensor
             QK = torch.zeros(bs, self.num_heads, seq_len, seq_len, device=x.device)
             
             # Process each head separately
@@ -130,7 +132,7 @@ class MultiHeadSelfAttention(nn.Module):
                 tril[indices[0], indices[1]] = self.trainable_params[h]
                 
                 # Compute symmetric matrix using Cholesky decomposition
-                Wqk = tril @ tril.T  # This gives us our symmetric matrix
+                Wqk = tril @ tril.T 
                 
                 # Project input for this head
                 head_input = x.view(bs, seq_len, self.num_heads, self.head_dim)[:, :, h]
@@ -141,22 +143,20 @@ class MultiHeadSelfAttention(nn.Module):
                     head_input.transpose(-2, -1)
                 )
             
-            # Scale attention scores
             attn_scores = QK / (self.head_dim ** 0.5)
             attn_weights = F.softmax(attn_scores, dim=-1)
             attn_weights = self.attn_drop(attn_weights)
             
-            # Apply attention weights to values
             output = torch.matmul(attn_weights, V)
             output = output.transpose(1, 2).contiguous().view(bs, seq_len, emb_dim)
             
-            # Final projection
             output = self.out(output)  
             
         return output
 
 
 class TransformerEncoderLayer(nn.Module):
+    """Defines a one Transformer encoder layer"""
     def __init__(self, emb_dim, num_heads, mlp_dim, include_mlp,modification):
         super(TransformerEncoderLayer, self).__init__()
         self.self_attn = MultiHeadSelfAttention(emb_dim, num_heads,modification)
@@ -189,6 +189,7 @@ class TransformerEncoderLayer(nn.Module):
 
 
 class TransformerEncoder(nn.Module):
+    """Defines a multi-layer Transformer encoder."""
     def __init__(self, emb_dim, num_heads, num_layers, mlp_dim, include_mlp,modification):
         super(TransformerEncoder, self).__init__()
         self.layers = nn.ModuleList([
@@ -203,6 +204,7 @@ class TransformerEncoder(nn.Module):
 
 
 class ReducedTransformer(nn.Module):
+    """The modified transformer model for classification tasks."""
     def __init__(self, embed_dim, num_heads, num_layers, n_classes, patch_size, num_patches, dropout, in_channels, include_mlp, modification):
         super(ReducedTransformer, self).__init__()
         self.embedding = PatchEmbedding(embed_dim, patch_size, num_patches, dropout, in_channels)
