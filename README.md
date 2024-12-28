@@ -16,19 +16,19 @@ These modifications achieve up to **90% reduction in parameters** while deliveri
 
 <img src="img\unchanged.png" width="600" alt="Simplified Transformer Diagram: Unchanged">
 
-Traditional Attention Mechanism.
+Figure 1: Traditional Attention Mechanism.
 
 <img src="img\wqk.png" width="600" alt="Simplified Transformer Diagram: WQK">
 
-Query and key matrices are collapsed into a single matrix of the same size.
+Figure 2: Query and key matrices are collapsed into a single matrix of the same size.
 
 <img src="img\omission.png" width="600" alt="Simplified Transformer Diagram: Omission">
 
-In addition to the collapsed query and key matrices, value and projection matrices, are omitted without eliminating the substance of the attention mechanism
+Figure 3: In addition to the collapsed query and key matrices, value and projection matrices, are omitted without eliminating the substance of the attention mechanism
 
 <img src="img\symmetry.png" width="600" alt="Simplified Transformer Diagram: Symmetry">
 
-The symmetric definition of a similarity matrix requires only half the parameters. This can be achieved by parameterizing a lower triangular matrix and multiplying it by its transpose
+Figure 4: The symmetric definition of a similarity matrix requires only half the parameters. This can be achieved by parameterizing a lower triangular matrix and multiplying it by its transpose
 
 ---
 
