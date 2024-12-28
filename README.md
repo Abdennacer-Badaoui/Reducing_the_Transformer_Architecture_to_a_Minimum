@@ -14,19 +14,19 @@ These modifications achieve up to **90% reduction in parameters** while deliveri
 ---
 ## Different modifications 
 
-<img src="unchanged.png" width="600" alt="Simplified Transformer Diagram: Unchanged">
+<img src="img\unchanged.png" width="600" alt="Simplified Transformer Diagram: Unchanged">
 
 Traditional Attention Mechanism.
 
-<img src="wqk.png" width="600" alt="Simplified Transformer Diagram: WQK">
+<img src="img\wqk.png" width="600" alt="Simplified Transformer Diagram: WQK">
 
 Query and key matrices are collapsed into a single matrix of the same size.
 
-<img src="omission.png" width="600" alt="Simplified Transformer Diagram: Omission">
+<img src="img\omission.png" width="600" alt="Simplified Transformer Diagram: Omission">
 
 In addition to the collapsed query and key matrices, value and projection matrices, are omitted without eliminating the substance of the attention mechanism
 
-<img src="symmetry.png" width="600" alt="Simplified Transformer Diagram: Symmetry">
+<img src="img\symmetry.png" width="600" alt="Simplified Transformer Diagram: Symmetry">
 
 The symmetric definition of a similarity matrix requires only half the parameters. This can be achieved by parameterizing a lower triangular matrix and multiplying it by its transpose
 
@@ -48,12 +48,12 @@ To get started, follow these steps:
 Here is a summary of results from 16 experiments on MNIST and CIFAR-10 using transformer models with varying configurations: 6 or 12 encoders, 1 or 4 attention heads, and with or without MLP.
 
 <div style="text-align: center;">
-    <img src="res_1.png" width="800" alt="Simplified Transformer Diagram: WQK">
+    <img src="img\res_1.png" width="800" alt="Simplified Transformer Diagram: WQK">
 </div>
 
 The tables below represents loss and accuracy for different variants of transformer-encoder modifications on MNIST and CIFAR-10 respectively: 1 or 4 heads, with or without the MLP, with a single $W_{qk}$ matrix, no value and projection matrices, or a symmetric similarity measurement.
 
 <div style="text-align: center;">
-    <img src="res_2.png" width="800" alt="Simplified Transformer Diagram: WQK">
+    <img src="img\res_2.png" width="800" alt="Simplified Transformer Diagram: WQK">
 </div>
 
