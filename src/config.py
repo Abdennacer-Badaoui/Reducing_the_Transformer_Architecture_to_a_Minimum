@@ -1,7 +1,7 @@
 class cfg: 
     data_name = "CIFAR" # or "MNIST"
-    wandb_project_name = "Test"
-    embed_dim = 64
+    wandb_project_name = "Test" # The name of the wandb project
+    embed_dim = 64 
     num_layers = 6
     patch_size = {"MNIST":7, "CIFAR":8}
     image_size = {"MNIST":28, "CIFAR":32}
