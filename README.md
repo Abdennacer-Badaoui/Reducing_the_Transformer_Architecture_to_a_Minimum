@@ -5,7 +5,7 @@ This repository provides an implementation of the techniques introduced in the p
 
 ### Key Innovations:
 1. **Removal of MLP layers:** Significantly reduces the number of trainable parameters. 
-2. **Collapsing matrices:** Combines query-key and omiting value-projection matrices for streamlined architecture. ($ W_{qk}+noW_{v}W_{o} $ )
+2. **Collapsing matrices:** Combines query-key and omiting value-projection matrices for streamlined architecture. ($W_{qk}+noW_{v}W_{o}$ )
 3. **Symmetric similarity matrices:** Enhances attention efficiency with fewer parameters. (symmetry)
 
 These modifications achieve up to **90% reduction in parameters** while delivering competitive results on popular benchmarks, including MNIST, CIFAR-10, and ImageNet. This repository demonstrates how these techniques can be applied to build lightweight and efficient transformer models.  
@@ -22,7 +22,7 @@ The second image shows the collapsing of the query-key projection matrices ($W_{
 
 The third figure represents the omission of the value-projection matrices. The justification for omitting $W_V$ and $W_O$ is based on the fact that in many NLP applications, we expect the output to be an embedding of a word or a language token. The space of embeddings is expected to be spanned by the input word embeddings. For that reason, it may seem unnecessary to transform the embeddings into another space and then transform them back to our embedding space. Therefore, we may choose to remove this transformation, and the output will be a convex combination of the input embeddings (which is expected to result in a valid and meaningful word).
 
-Finally, the fourth image uses **Cholesky Decomposition**: Parameterize a lower triangular matrix $ T_{QK} $ and compute:
+Finally, the fourth image uses **Cholesky Decomposition**: Parameterize a lower triangular matrix $T_{QK}$ and compute:
 
 $$
 W_{QK_s} = T_{QK_s} (T_{QK_s})^T
