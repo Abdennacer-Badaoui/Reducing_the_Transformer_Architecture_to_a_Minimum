@@ -96,7 +96,7 @@ The tables below represent loss and accuracy for different variants of transform
 
 
 ### CIFAR-10:
-- Using a collapsed matrix $$ W_{qk} $$, while keeping the MLP intact, along with omitted matrices $$ W_v $$ and $$ W_O $$, results in a parameter reduction of approximately **45\%**, with a relatively small performance loss of **4.47\%**.
+- Using a collapsed matrix $ W_{qk} $, while keeping the MLP intact, along with omitted matrices $ W_v $ and $ W_O $, results in a parameter reduction of approximately **45\%**, with a relatively small performance loss of **4.47\%**.
 
 - Removing only the MLP while maintaining the rest of the architecture reduces the number of parameters by approximately **30\%**, with a performance loss of **10\%** (from 68.19\% validation accuracy to 61.37\% for the 4-head version).
 
