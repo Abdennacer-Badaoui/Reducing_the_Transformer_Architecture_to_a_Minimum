@@ -1,4 +1,4 @@
-# Reducing the Transformer Architecture to a Minimum  
+#  Reducing the Transformer Architecture to a Minimum
 
 ## Introduction  
 This repository provides an implementation of the techniques introduced in the paper [**"Reducing the Transformer Architecture to a Minimum"**](https://arxiv.org/html/2410.13732v1). The paper simplifies the standard transformer model while preserving its strong performance.  
