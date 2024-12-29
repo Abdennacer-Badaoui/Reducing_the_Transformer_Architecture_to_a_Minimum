@@ -63,7 +63,7 @@ To get started, follow these steps:
 ## Results
 
 As the model complexity increases (i.e., the number of parameters increases), we need more training data to ensure that our model reaches its full potential. Otherwise, the model is likely to exhibit high variance due to an insufficient training dataset relative to the number of parameters, leading to overfitting. Therefore, it is crucial to ensure that the size of our training data aligns with the complexity of the model, enabling us to accurately assess its performance.
-This aligns with the requirement for the overdetermination ratio QQ to be greater than unity, which is defined as: $Q=\dfrac{KM}{P}$
+This aligns with the requirement for the overdetermination ratio $Q$ to be greater than unity, which is defined as: $Q=\dfrac{KM}{P}$
 where $K$ is the number of training examples, $M$ is the length of the output vector (usually equal to the number of classes), and $P$ is the number of trainable model parameters.
 
 Here is a summary of results from 16 experiments on MNIST and CIFAR-10 using transformer models with varying configurations: 6 or 12 encoders, 1 or 4 attention heads, and with or without MLP.
