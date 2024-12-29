@@ -73,8 +73,8 @@ Here is a summary of results from 16 experiments on MNIST and CIFAR-10 using tra
 </div>
 
 
-## MNIST:
-- Using a collapsed matrix \( W_{qk} \), while keeping the MLP intact, results in better validation accuracy (**0.061% improvement**) with a significant parameter reduction of approximately **16%**. Adding the omission of \( W_v \) and \( W_O \) further reduces the parameters by nearly **48%**, with only a small performance loss of **0.11%**.
+### MNIST:
+- Using a collapsed matrix $W_{qk}$, while keeping the MLP intact, results in better validation accuracy (**0.061% improvement**) with a significant parameter reduction of approximately **16%**. Adding the omission of $W_v$ and $W_O$ further reduces the parameters by nearly **48%**, with only a small performance loss of **0.11%**.
 
 - Removing only the MLP while maintaining the rest of the architecture reduces the number of parameters by approximately **32%**, with a relatively small performance loss of **0.79%**.
 
@@ -82,7 +82,6 @@ Here is a summary of results from 16 experiments on MNIST and CIFAR-10 using tra
 
 - The final variant, without the MLP and with both collapsed and omitted matrices, achieves a validation accuracy of **94.45%** (a performance loss of **3.94%**) while delivering an **80% reduction in parameters**, making it the most parameter-efficient configuration.
 
-## Conclusion:
 The results demonstrate that collapsing and omitting matrices, combined with the removal of MLPs, can significantly reduce the number of parameters without significantly affecting performance. Depending on the use case, one can balance parameter efficiency and performance by using different variants.
 
 
