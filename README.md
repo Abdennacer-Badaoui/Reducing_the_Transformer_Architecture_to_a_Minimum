@@ -74,11 +74,13 @@ The tables below represents loss and accuracy for different variants of transfor
     <img src="img\res_2.png" width="800" alt="Simplified Transformer Diagram: WQK">
 </div>
 
-## Discussion 
 
 On MNIST, removing the MLP offers an efficient trade-off, we can reduce the parameters by ~33% with minimal performance loss (<0.5%). On CIFAR-10, the impact is more significant, we see a performance losses of ~2% to 9%, depending on the configuration. But still 12-4 and 6-4 configurations provide a favorable balance.
+
 We present accuracies for different variants of transformer-encoder modifications on MNIST and CIFAR-10. It is evident, for both datasets, that significantly reducing the number of parameters has only a minimal impact on accuracy. For instance, with a negligible accuracy loss of just 0.11%, it is possible to reduce the number of parameters by nearly 50%, which is a remarkable gain. This opens up many opportunities to deploy large models on edge devices.
+
 For a more aggressive reduction, using the most minimalist configuration (removing the MLP and collapsing Wqk with omitted Wv and Wo) reduces accuracy by 4 points but achieves an impressive 80% reduction in parameters, which is substantial.
+
 On CIFAR-10, similar trends are observed. However, some variants show poorer validation accuracies compared to the unmodified architecture. This could be attributed to undertraining (as the models were trained for only 100 epochs, compared to the 500 epochs in the original paper, due to limited computational resources) and the fact that CIFAR-10 is a more challenging benchmark than MNIST.
 
 
