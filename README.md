@@ -10,6 +10,15 @@ This repository provides an implementation of the techniques introduced in the p
 
 These modifications achieve up to **90% reduction in parameters** while delivering competitive results on popular benchmarks, including MNIST, CIFAR-10, and ImageNet. This repository demonstrates how these techniques can be applied to build lightweight and efficient transformer models.  
 
+### Reports:
+
+Trasformer : MLP-vs-No-MPL (MNIST) : https://api.wandb.ai/links/badaoui/a5panc2v
+
+Trasformer : MLP-vs-No-MPL (CIFAR-10) : https://api.wandb.ai/links/badaoui/c10h2pe7
+
+Variants of Reduced Transformers (MNIST) : https://api.wandb.ai/links/badaouiabdessamade-en/nfypng3o
+
+Variants of Reduced Transformers (CIFAR-10) : https://api.wandb.ai/links/badaouiabdessamade-en/n4psbzpx
 
 ---
 ## Different modifications 
